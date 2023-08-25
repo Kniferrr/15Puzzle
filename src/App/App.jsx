@@ -1,11 +1,11 @@
 import "./App.css";
-import FifteenPuzzle from "../Fild/Fild";
+import FifteenPuzzle from "../FifteenPuzzle/FifteenPuzzle";
 
 function App() {
   return (
-    <>
+    <div className="main">
       <FifteenPuzzle />
-    </>
+    </div>
   );
 }
 
