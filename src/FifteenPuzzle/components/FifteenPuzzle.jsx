@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { moveTile, shufflePuzzle, gridSizeChange } from "../actions";
+import { moveTile, shufflePuzzle } from "../../actions";
 import "./FifteenPuzzle.css";
+import GridSizeSelectInput from "./gridSizeSelectInput/GridSizeSelectInput";
+import SuffleButton from "./SuffleButton/SuffleButton.jsx";
 
 const FifteenPuzzle = () => {
   const dispatch = useDispatch();
@@ -43,12 +45,7 @@ const FifteenPuzzle = () => {
   };
 
   const OnClickShufflePuzzle = () => {
-    const numbers = Array.from({ length: realGridSize }, (_, i) => i);
-    for (let i = numbers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-    }
-    dispatch(shufflePuzzle(numbers));
+    dispatch(shufflePuzzle());
   };
 
   const isPuzzleSolved = () => {
@@ -57,41 +54,24 @@ const FifteenPuzzle = () => {
       { length: realGridSize - 1 },
       (_, i) => i + 1
     );
-
     // Проверяем, совпадает ли текущая последовательность с правильной.
     for (let i = 0; i < 15; i++) {
       if (puzzle[i] !== correctSequence[i]) {
         return false;
       }
     }
-
     // Проверяем, что последняя плитка пуста (с числом 0).
     if (puzzle[15] !== 0) {
       return false;
     }
-
     return true; // Если все условия выполнены, пазл правильно собран.
   };
 
-  const onGridSizeSelect = (event) => {
-    dispatch(gridSizeChange(event.target.value));
-  };
-
-  const puzzle_container_stule = {
-    display: "grid", // Обернуто в кавычки
-    gridTemplateColumns: `repeat(${gridSize}, 1fr)`, // Используйте количество колонок из состояния
-    gap: "5px",
-    margin: "0 auto",
-    padding: "10px",
-    backgroundColor: "transparent",
-    border: "2px solid #ccc",
-    justifyContent: "center",
-    alignContent: "center",
-  };
+  const stylePuzzleContainer = getPuzzleContainerStule(gridSize);
 
   return (
     <div className="game-bord">
-      <div className="puzzle-container" style={puzzle_container_stule}>
+      <div className="puzzle-container" style={stylePuzzleContainer}>
         {puzzle.map((number, index) => (
           <div
             key={index}
@@ -102,28 +82,24 @@ const FifteenPuzzle = () => {
           </div>
         ))}
       </div>
-      <div className="suffle-button">
-        <button onClick={() => OnClickShufflePuzzle()}>ShufflePuzzle</button>
-      </div>
-      <div className="suffle-button">
-        <label id="gridSizeSelect">Выберите число:</label>
-        <select
-          id="gridSizeSelect"
-          name="gridSizeSelect"
-          value={gridSize}
-          onChange={onGridSizeSelect}
-        >
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-        </select>
-      </div>
+      <SuffleButton SuffleButton={SuffleButton} />
+      <GridSizeSelectInput />
     </div>
   );
+};
+
+const getPuzzleContainerStule = (gridSize) => {
+  return {
+    display: "grid", // Обернуто в кавычки
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`, // Используйте количество колонок из состояния
+    gap: "5px",
+    margin: "0 auto",
+    padding: "10px",
+    backgroundColor: "transparent",
+    border: "2px solid #ccc",
+    justifyContent: "center",
+    alignContent: "center",
+  };
 };
 
 export default FifteenPuzzle;

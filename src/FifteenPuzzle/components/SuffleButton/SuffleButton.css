@@ -1,0 +1,42 @@
+/* CSS для компонента FifteenPuzzle с учётом тёмного фона */
+.game-bord {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.puzzle-piece {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* Размер текста внутри плиток */
+  width: 60px; /* Ширина плитки */
+  height: 60px; /* Высота плитки */
+  background-color: #333; /* Цвет фона плитки (тёмный фон) */
+  color: #fff; /* Цвет текста (белый) */
+  border: 1px solid #ccc; /* Граница вокруг плитки */
+  cursor: pointer; /* Показать указатель при наведении на плитку */
+  transition: background-color 0.2s; /* Плавное изменение цвета фона */
+}
+
+.puzzle-piece.empty {
+  background-color: transparent; /* Пустая плитка без фона */
+  cursor: default; /* Сбросить стандартный курсор */
+}
+
+.suffle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.grid-size-select-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}

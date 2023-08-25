@@ -24,7 +24,12 @@ const puzzleReducer = (state = initialState, action) => {
       ];
       return { ...state, puzzle: updatedPuzzle };
     case SHUFFLE_PUZZLE:
-      const numbers = action.payload;
+      const realGridSize = Math.pow(state.gridSize, 2);
+      const numbers = Array.from({ length: realGridSize }, (_, i) => i);
+      for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+      }
       return { ...state, puzzle: numbers, complitePuzzle: false };
     case ON_COMPLITE_PUZZLE:
       return { ...state, complitePuzzle: true };

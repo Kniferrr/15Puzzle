@@ -1,5 +1,5 @@
 import "./App.css";
-import FifteenPuzzle from "../FifteenPuzzle/FifteenPuzzle";
+import FifteenPuzzle from "../FifteenPuzzle/components/FifteenPuzzle";
 
 function App() {
   return (

@@ -8,9 +8,9 @@ export const moveTile = (clickedIndex, emptyIndex) => ({
   payload: { clickedIndex, emptyIndex },
 });
 
-export const shufflePuzzle = (numbers) => ({
+export const shufflePuzzle = () => ({
   type: SHUFFLE_PUZZLE,
-  payload: numbers,
+  payload: null,
 });
 
 export const onComplitePuzzle = () => ({
