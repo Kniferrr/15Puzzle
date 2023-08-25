@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { gridSizeChange } from "../../../store/redusers/puzzleReducer";
 import "./GridSizeSelectInput.css";
