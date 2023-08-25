@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { moveTile, shufflePuzzle } from "../../actions";
+import { moveTile, shufflePuzzle } from "../../store/redusers/puzzleReducer";
 import "./FifteenPuzzle.css";
 import GridSizeSelectInput from "./gridSizeSelectInput/GridSizeSelectInput";
 import SuffleButton from "./SuffleButton/SuffleButton.jsx";
@@ -22,7 +22,7 @@ const FifteenPuzzle = () => {
   const HandleClick = (clickedIndex) => {
     const emptyIndex = puzzle.indexOf(0);
     if (isValidMove(clickedIndex, emptyIndex, puzzle)) {
-      dispatch(moveTile(clickedIndex, emptyIndex));
+      dispatch(moveTile({ clickedIndex, emptyIndex }));
       if (isPuzzleSolved(realGridSize, puzzle)) {
         alert("Поздравляем! Пазл правильно собран!");
       }

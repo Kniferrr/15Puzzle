@@ -18,6 +18,6 @@ export const main = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = main.actions;
+export const { increment, incrementByAmount } = main.actions;
 
 export default main.reducer;

@@ -1,10 +1,4 @@
-// reducers.js
-import {
-  MOVE_TILE,
-  SHUFFLE_PUZZLE,
-  ON_COMPLITE_PUZZLE,
-  GRID_SIZE_CHANGE,
-} from "../../actions";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   puzzle: [],
@@ -12,9 +6,11 @@ const initialState = {
   complitePuzzle: false,
 };
 
-const puzzleReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case MOVE_TILE:
+const puzzleReducer = createSlice({
+  name: "puzzleReducer",
+  initialState,
+  reducers: {
+    moveTile: (state, action) => {
       const { clickedIndex, emptyIndex } = action.payload;
       // Обновление состояния игры
       const updatedPuzzle = [...state.puzzle];
@@ -23,7 +19,8 @@ const puzzleReducer = (state = initialState, action) => {
         updatedPuzzle[clickedIndex],
       ];
       return { ...state, puzzle: updatedPuzzle };
-    case SHUFFLE_PUZZLE:
+    },
+    shufflePuzzle: (state) => {
       const realGridSize = Math.pow(state.gridSize, 2);
       const numbers = Array.from({ length: realGridSize }, (_, i) => i);
       for (let i = numbers.length - 1; i > 0; i--) {
@@ -31,14 +28,18 @@ const puzzleReducer = (state = initialState, action) => {
         [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
       }
       return { ...state, puzzle: numbers, complitePuzzle: false };
-    case ON_COMPLITE_PUZZLE:
+    },
+    onComplitePuzzle: (state) => {
       return { ...state, complitePuzzle: true };
-    case GRID_SIZE_CHANGE:
+    },
+    gridSizeChange: (state, action) => {
       const newGridSize = action.payload;
       return { ...state, gridSize: newGridSize };
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
 
-export default puzzleReducer;
+export const { moveTile, shufflePuzzle, onComplitePuzzle, gridSizeChange } =
+  puzzleReducer.actions;
+
+export default puzzleReducer.reducer;

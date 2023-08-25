@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import main from "./features/main/mainRedix.js";
-import puzzleReducer from "./features/puzzleReducer/puzzleReducer.js";
+import main from "./redusers/mainRedix.js";
+import puzzleReducer from "./redusers/puzzleReducer.js";
 
 export const store = configureStore({
   reducer: {
