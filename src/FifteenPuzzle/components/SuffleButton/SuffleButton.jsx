@@ -1,9 +1,8 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import "./SuffleButton.css";
-import { shufflePuzzle } from "../../../store/redusers/puzzleReducer";
+import { shufflePuzzle } from "../../reducers/puzzleReducer";
 
-const SuffleButton = (realGridSize) => {
+const SuffleButton = () => {
   const dispatch = useDispatch();
 
   const OnClickShufflePuzzle = () => {

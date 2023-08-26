@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { gridSizeChange } from "../../../store/redusers/puzzleReducer";
+import { gridSizeChange } from "../../reducers/puzzleReducer";
 import "./GridSizeSelectInput.css";
 
 const GridSizeSelectInput = () => {
