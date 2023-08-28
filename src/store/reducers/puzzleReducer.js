@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isValidMove, isPuzzleSolved } from "../actions/puzzleAction";
 
 const initialState = {
   puzzle: [],
@@ -11,14 +12,29 @@ const puzzleReducer = createSlice({
   initialState,
   reducers: {
     moveTile: (state, action) => {
+      const realGridSize = Math.pow(state.gridSize, 2);
+      const puzzle = state.puzzle;
+      let newComplitePuzzle = state.complitePuzzle;
       const { clickedIndex, emptyIndex } = action.payload;
-      // Обновление состояния игры
       const updatedPuzzle = [...state.puzzle];
-      [updatedPuzzle[clickedIndex], updatedPuzzle[emptyIndex]] = [
-        updatedPuzzle[emptyIndex],
-        updatedPuzzle[clickedIndex],
-      ];
-      return { ...state, puzzle: updatedPuzzle };
+      if (isValidMove(clickedIndex, emptyIndex, puzzle)) {
+        [updatedPuzzle[clickedIndex], updatedPuzzle[emptyIndex]] = [
+          updatedPuzzle[emptyIndex],
+          updatedPuzzle[clickedIndex],
+        ];
+        if (isPuzzleSolved(realGridSize, puzzle)) {
+          newComplitePuzzle = true;
+        } else {
+          newComplitePuzzle = false;
+        }
+      }
+      // Обновление состояния игры
+
+      return {
+        ...state,
+        puzzle: updatedPuzzle,
+        complitePuzzle: newComplitePuzzle,
+      };
     },
     shufflePuzzle: (state) => {
       const realGridSize = Math.pow(state.gridSize, 2);

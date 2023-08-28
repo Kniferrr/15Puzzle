@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import "./SuffleButton.css";
-import { shufflePuzzle } from "../../reducers/puzzleReducer";
+import { shufflePuzzle } from "../../../store/reducers/puzzleReducer";
 
 const SuffleButton = () => {
   const dispatch = useDispatch();

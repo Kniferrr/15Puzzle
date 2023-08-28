@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { shufflePuzzle } from "../reducers/puzzleReducer";
+import { shufflePuzzle } from "../../store/reducers/puzzleReducer";
 import "./FifteenPuzzle.css";
 import GridSizeSelectInput from "./GridSizeSelectInput/GridSizeSelectInput";
 import SuffleButton from "./SuffleButton/SuffleButton.jsx";
