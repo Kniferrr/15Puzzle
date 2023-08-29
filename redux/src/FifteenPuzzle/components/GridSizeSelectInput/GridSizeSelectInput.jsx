@@ -1,12 +1,13 @@
-import usePuzzleStore from "../../puzzleState";
+import { useSelector, useDispatch } from "react-redux";
+import { gridSizeChange } from "../../../store/reducers/puzzleReducer";
 import "./GridSizeSelectInput.css";
 
 const GridSizeSelectInput = () => {
-  const gridSize = usePuzzleStore((state) => state.gridSize);
-  const gridSizeChange = usePuzzleStore((state) => state.gridSizeChange);
+  const dispatch = useDispatch();
+  const gridSize = useSelector((state) => state.puzzleReducer.gridSize);
 
   const onGridSizeSelect = (event) => {
-    gridSizeChange(event.target.value);
+    dispatch(gridSizeChange(event.target.value));
   };
 
   return (

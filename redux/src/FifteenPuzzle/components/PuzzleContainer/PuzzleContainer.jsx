@@ -1,14 +1,15 @@
-import usePuzzleStore from "../../puzzleState";
+import { useSelector, useDispatch } from "react-redux";
+import { moveTile } from "../../../store/reducers/puzzleReducer";
 import "./PuzzleContainer.css";
 
 const PuzzleContainer = () => {
-  const puzzle = usePuzzleStore((state) => state.puzzle);
-  const gridSize = usePuzzleStore((state) => state.gridSize);
-  const moveTile = usePuzzleStore((state) => state.moveTile);
+  const dispatch = useDispatch();
+  const puzzle = useSelector((state) => state.puzzleReducer.puzzle);
+  const gridSize = useSelector((state) => state.puzzleReducer.gridSize);
 
   const HandleClick = (clickedIndex) => {
     const emptyIndex = puzzle.indexOf(0);
-    moveTile({ clickedIndex, emptyIndex });
+    dispatch(moveTile({ clickedIndex, emptyIndex }));
   };
 
   const stylePuzzleContainer = getPuzzleContainerStule(gridSize);

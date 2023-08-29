@@ -1,0 +1,7 @@
+/* CSS для компонента FifteenPuzzle с учётом тёмного фона */
+.game-bord {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

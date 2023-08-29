@@ -1,16 +1,17 @@
 import { useEffect } from "react";
-import usePuzzleStore from "../puzzleState";
+import { useSelector, useDispatch } from "react-redux";
+import { shufflePuzzle } from "../../store/reducers/puzzleReducer";
 import "./FifteenPuzzle.css";
 import GridSizeSelectInput from "./GridSizeSelectInput/GridSizeSelectInput";
 import SuffleButton from "./SuffleButton/SuffleButton.jsx";
 import PuzzleContainer from "./PuzzleContainer/PuzzleContainer";
 
 const FifteenPuzzle = () => {
-  const gridSize = usePuzzleStore((state) => state.gridSize);
-  const shufflePuzzle = usePuzzleStore((state) => state.shufflePuzzle);
+  const dispatch = useDispatch();
+  const gridSize = useSelector((state) => state.puzzleReducer.gridSize);
 
   useEffect(() => {
-    shufflePuzzle();
+    dispatch(shufflePuzzle());
   }, [gridSize]);
 
   return (

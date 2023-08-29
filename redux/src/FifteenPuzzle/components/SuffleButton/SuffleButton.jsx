@@ -1,11 +1,12 @@
+import { useDispatch } from "react-redux";
 import "./SuffleButton.css";
-import usePuzzleStore from "../../puzzleState";
+import { shufflePuzzle } from "../../../store/reducers/puzzleReducer";
 
 const SuffleButton = () => {
-  const shufflePuzzle = usePuzzleStore((state) => state.shufflePuzzle);
+  const dispatch = useDispatch();
 
   const OnClickShufflePuzzle = () => {
-    shufflePuzzle();
+    dispatch(shufflePuzzle());
   };
 
   return (
