@@ -19,6 +19,9 @@ export const isPuzzleSolved = (realGridSize, puzzle) => {
     { length: realGridSize - 1 },
     (_, i) => i + 1
   );
+  correctSequence[15] = 0;
+  console.log(correctSequence);
+  console.log(puzzle);
   // Проверяем, совпадает ли текущая последовательность с правильной.
   for (let i = 0; i < 15; i++) {
     if (puzzle[i] !== correctSequence[i]) {

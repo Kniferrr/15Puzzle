@@ -37,7 +37,7 @@ const usePuzzleStore = create()(
             updatedPuzzle[emptyIndex],
             updatedPuzzle[clickedIndex],
           ];
-          if (isPuzzleSolved(realGridSize, puzzle)) {
+          if (isPuzzleSolved(realGridSize, updatedPuzzle)) {
             newComplitePuzzle = true;
           } else {
             newComplitePuzzle = false;
