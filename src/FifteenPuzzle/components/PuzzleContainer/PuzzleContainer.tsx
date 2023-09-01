@@ -1,15 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
-import { moveTile } from "../../../store/reducers/puzzleReducer";
+import usePuzzleStore from "../../puzzleState";
 import "./PuzzleContainer.css";
 
 const PuzzleContainer = () => {
-  const dispatch = useDispatch();
-  const puzzle = useSelector((state) => state.puzzleReducer.puzzle);
-  const gridSize = useSelector((state) => state.puzzleReducer.gridSize);
+  const puzzle = usePuzzleStore((state) => state.puzzle);
+  const gridSize = usePuzzleStore((state) => state.gridSize);
+  const moveTile = usePuzzleStore((state) => state.moveTile);
 
-  const HandleClick = (clickedIndex) => {
+  const HandleClick = (clickedIndex: number) => {
     const emptyIndex = puzzle.indexOf(0);
-    dispatch(moveTile({ clickedIndex, emptyIndex }));
+    moveTile({ clickedIndex, emptyIndex });
   };
 
   const stylePuzzleContainer = getPuzzleContainerStule(gridSize);
@@ -31,7 +30,7 @@ const PuzzleContainer = () => {
 
 export default PuzzleContainer;
 
-const getPuzzleContainerStule = (gridSize) => {
+const getPuzzleContainerStule = (gridSize: number) => {
   return {
     display: "grid", // Обернуто в кавычки
     gridTemplateColumns: `repeat(${gridSize}, 1fr)`, // Используйте количество колонок из состояния

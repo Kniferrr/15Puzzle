@@ -2,21 +2,38 @@ import { immer } from "zustand/middleware/immer";
 import { create } from "zustand";
 import { isValidMove, isPuzzleSolved } from "./puzzleAction";
 
-const usePuzzleStore = create()(
+interface PuzzleState {
+  puzzle: number[];
+  gridSize: number;
+  complitePuzzle: boolean;
+}
+
+export interface PuzzleStateActions extends PuzzleState {
+  gridSizeChange: (newGridSize: number) => void;
+  onComplitePuzzle: () => void;
+  shufflePuzzle: () => void;
+  moveTile: (args: { clickedIndex: number; emptyIndex: number }) => void;
+}
+
+const initialState: PuzzleState = {
+  puzzle: [],
+  gridSize: 4,
+  complitePuzzle: false,
+};
+
+const usePuzzleStore = create<PuzzleState & PuzzleStateActions>()(
   immer((set) => ({
-    puzzle: [],
-    gridSize: 4,
-    complitePuzzle: false,
-    gridSizeChange: (newGridSize) =>
-      set((state) => {
+    ...initialState,
+    gridSizeChange: (newGridSize: number) =>
+      set((state: PuzzleState) => {
         state.gridSize = newGridSize;
       }),
     onComplitePuzzle: () =>
-      set((state) => {
+      set((state: PuzzleState) => {
         state.complitePuzzle = true;
       }),
     shufflePuzzle: () =>
-      set((state) => {
+      set((state: PuzzleState) => {
         const realGridSize = Math.pow(state.gridSize, 2);
         const numbers = Array.from({ length: realGridSize }, (_, i) => i);
         for (let i = numbers.length - 1; i > 0; i--) {
@@ -26,8 +43,14 @@ const usePuzzleStore = create()(
         state.puzzle = numbers;
         state.complitePuzzle = false;
       }),
-    moveTile: ({ clickedIndex, emptyIndex }) =>
-      set((state) => {
+    moveTile: ({
+      clickedIndex,
+      emptyIndex,
+    }: {
+      clickedIndex: number;
+      emptyIndex: number;
+    }) =>
+      set((state: PuzzleState) => {
         const realGridSize = Math.pow(state.gridSize, 2);
         const puzzle = state.puzzle;
         let newComplitePuzzle = state.complitePuzzle;
