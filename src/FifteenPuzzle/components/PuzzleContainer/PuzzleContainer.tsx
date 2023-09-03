@@ -11,7 +11,9 @@ const PuzzleContainer = () => {
     moveTile({ clickedIndex, emptyIndex });
   };
 
-  const stylePuzzleContainer = getPuzzleContainerStule(gridSize);
+  const stylePuzzleContainer = {
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`, // Используйте количество колонок из состояния
+  };
 
   return (
     <div className="puzzle-container" style={stylePuzzleContainer}>
@@ -29,17 +31,3 @@ const PuzzleContainer = () => {
 };
 
 export default PuzzleContainer;
-
-const getPuzzleContainerStule = (gridSize: number) => {
-  return {
-    display: "grid", // Обернуто в кавычки
-    gridTemplateColumns: `repeat(${gridSize}, 1fr)`, // Используйте количество колонок из состояния
-    gap: "5px",
-    margin: "0 auto",
-    padding: "10px",
-    backgroundColor: "transparent",
-    border: "2px solid #ccc",
-    justifyContent: "center",
-    alignContent: "center",
-  };
-};

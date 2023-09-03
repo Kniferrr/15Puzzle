@@ -16,3 +16,14 @@
   background-color: transparent; /* Пустая плитка без фона */
   cursor: default; /* Сбросить стандартный курсор */
 }
+
+.puzzle-container {
+  display: grid;
+  gap: 5px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  justify-content: center;
+  align-content: center;
+}

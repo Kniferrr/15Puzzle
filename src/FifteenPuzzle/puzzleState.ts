@@ -1,19 +1,7 @@
 import { immer } from "zustand/middleware/immer";
 import { create } from "zustand";
 import { isValidMove, isPuzzleSolved } from "./puzzleAction";
-
-interface PuzzleState {
-  puzzle: number[];
-  gridSize: number;
-  complitePuzzle: boolean;
-}
-
-export interface PuzzleStateActions extends PuzzleState {
-  gridSizeChange: (newGridSize: number) => void;
-  onComplitePuzzle: () => void;
-  shufflePuzzle: () => void;
-  moveTile: (args: { clickedIndex: number; emptyIndex: number }) => void;
-}
+import { PuzzleState, PuzzleStateActions } from "./PuzzleStateType";
 
 const initialState: PuzzleState = {
   puzzle: [],
@@ -21,7 +9,7 @@ const initialState: PuzzleState = {
   complitePuzzle: false,
 };
 
-const usePuzzleStore = create<PuzzleState & PuzzleStateActions>()(
+const usePuzzleStore = create<PuzzleStateActions>()(
   immer((set) => ({
     ...initialState,
     gridSizeChange: (newGridSize: number) =>
